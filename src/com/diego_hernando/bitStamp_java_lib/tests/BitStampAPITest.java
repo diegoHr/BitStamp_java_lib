@@ -5,13 +5,18 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.PrintStream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.diego_hernando.bitStamp_java_lib.BitStampAPI;
 import com.diego_hernando.bitStamp_java_lib.CurrencyPairsBitStamp;
 
+
+
 public class BitStampAPITest   {
 	private BitStampAPI api;
+	
+	
 	
 	
 	@Test
@@ -48,9 +53,30 @@ public class BitStampAPITest   {
 		assertNotNull(response);
 	}
 	
+	@Test
+	public void signatureTest() throws Exception{
+		setUp();
+		long nonce=1506451251465L;
+		String signature=api.getSignature(nonce);
+		Assert.assertEquals("61DA60163CF90673B01623C14E0FF72CA31DC8FEEDC9BDE134714FEAC5CEED99", signature);
+	}
+	
+	@Test
+	public void getBalanceTest() throws Exception{
+		setUp();
+		String response=api.getBalance();
+		System.out.println("Balance : "+response);
+		assertNotNull(response);
+		
+	}
+	
 	
     protected void setUp() throws Exception{
 		api=new BitStampAPI();
+		ApiLoginDataTest login=new ApiLoginDataTest();
+		api.setId(login.id);
+		api.setKey(login.key);
+		api.setSecret(login.secret);
 	}
 
 	
