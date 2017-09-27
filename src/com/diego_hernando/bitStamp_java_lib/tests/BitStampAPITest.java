@@ -67,7 +67,52 @@ public class BitStampAPITest   {
 		String response=api.getBalance();
 		System.out.println("Balance : "+response);
 		assertNotNull(response);
+	}
+	
+	
+	
+	
+	@Test
+	public void getBalanceEthEurTest() throws Exception{
+		setUp();
+		String response=api.getBalance(CurrencyPairsBitStamp.ETHEUR);
+		System.out.println("Balance : "+response);
+		assertNotNull(response);
 		
+	}
+	
+	@Test
+	public void getAllTransactionsTest() throws Exception{
+		setUp();
+		String response=api.getMyTransactions();
+		System.out.println("Transactions : "+response);
+		assertNotNull(response);
+		
+	}
+	@Test
+	public void getTransactionsEthEurTest() throws Exception{
+		setUp();
+		String response=api.getMyTransactions(CurrencyPairsBitStamp.ETHEUR);
+		System.out.println("Transactions : "+response);
+		assertNotNull(response);
+		
+	}
+	
+	
+	@Test
+	public void getAllOpenOrdersTest() throws Exception{
+		setUp();
+		String response=api.getOpenOrders();
+		System.out.println("Open orders : "+response);
+		assertNotNull(response);
+	}
+	
+	@Test
+	public void getOpenOrdersEthEurTest() throws Exception{
+		setUp();
+		String response=api.getOpenOrders(CurrencyPairsBitStamp.ETHEUR);
+		System.out.println("Open orders : "+response);
+		assertNotNull(response);
 	}
 	
 	

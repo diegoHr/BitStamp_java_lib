@@ -86,8 +86,13 @@ public class ApiRequest {
 	
 	private String privateOperation(String operation,String key, String signature,long nonce) throws IOException, BadResponseException {
 		
-		String urlParameters  = "key="+key+"&signature="+signature+"&nonce="+nonce;
-		byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+		String postParameters  = "key="+key+"&signature="+signature+"&nonce="+nonce;
+		return privateOperationCustomPostParameters(operation, postParameters);
+		
+		
+	}
+	private String privateOperationCustomPostParameters(String operation,String postParameters)throws IOException, BadResponseException {
+		byte[] postData = postParameters.getBytes( StandardCharsets.UTF_8 );
 		
 		StringBuilder result = new StringBuilder();
 		URL url = new URL(baseUrl+operation);
@@ -118,7 +123,6 @@ public class ApiRequest {
 		}
 		rd.close();
 		return result.toString();
-		
 	}
 	
 	
@@ -126,6 +130,85 @@ public class ApiRequest {
 		
 		return privateOperation(privateOperations.BALANCE_ALL, key, signature, nonce);
 	}
+	
+	public String privateGetBalance(String key,String signature, long nonce, CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+		return privateOperation(String.format(privateOperations.BALANCE,currency.toString()), key, signature, nonce);
+	}
+	
+	public String privateGetTransactions(String key,String signature, long nonce) throws IOException, BadResponseException {
+		return privateOperation(privateOperations.USER_TRANSACTIONS_ALL, key, signature, nonce);
+	}
+	
+	public String privateGetTransactions(String key,String signature, long nonce, CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+		return privateOperation(String.format(privateOperations.USER_TRANSACTIONS,currency.toString()), key, signature, nonce);
+	}
+	
+	public String privateGetOpenOrders(String key,String signature, long nonce) throws IOException, BadResponseException {
+		return privateOperation(privateOperations.LIST_OPEN_ORDERS_ALL, key, signature, nonce);
+	}
+	
+	public String privateGetOpenOrders(String key,String signature, long nonce,CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+		return privateOperation(String.format(privateOperations.LIST_OPEN_ORDERS,currency.toString()), key, signature, nonce);
+	}
+	
+	public String privateGetOrderStatus(String key,String signature, long nonce,int idOrder) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&id="+idOrder;
+		return privateOperationCustomPostParameters(privateOperations.ORDER_STATUS, postParameters);
+	}
+	
+	
+	public String privateCancelOrder(String key, String signature, long nonce, int idOrder) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&id="+idOrder;
+		return privateOperationCustomPostParameters(privateOperations.CANCEL_ORDER, postParameters);
+	}
+	
+	public String privateCancelAllOrders(String key, String signature, long nonce) throws IOException, BadResponseException {
+		return privateOperation(privateOperations.CANCEL_ALL_ORDERS, key, signature, nonce);
+	}
+	
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
+		if(isDailyOrder) {
+			postParameters=postParameters+"&daily_order=True";
+		}
+		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
+	}
+	
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, float limitPrice ) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
+		
+		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
+	}
+	
+	public String privateOpenBuyMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
+		
+		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_MARKET_ORDER, currency.toString()), postParameters);
+	}
+	
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, float limitPrice ) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
+		
+		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
+	}
+	
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
+		if(isDailyOrder) {
+			postParameters=postParameters+"&daily_order=True";
+		}
+		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
+	}
+	
+	public String privateOpenSellMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
+		
+		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_MARKET_ORDER, currency.toString()), postParameters);
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -154,19 +237,19 @@ public class ApiRequest {
 		private final String BALANCE_ALL="v2/balance/";
 		
 		//balance/{currency_pair}/
-		private final String BALANCE="v2/balance/%s";
+		private final String BALANCE="v2/balance/%s/";
 		
 		
 		private final String USER_TRANSACTIONS_ALL="v2/user_transactions/";
 		
 		//user_transactions/{currency_pair}/
-		private final String USER_TRANSACTIONS="v2/user_transactions/%s";
+		private final String USER_TRANSACTIONS="v2/user_transactions/%s/";
 		
 		
 		private final String LIST_OPEN_ORDERS_ALL="v2/open_orders/all/";
 		
 		//open_orders/{currency_pair}
-		private final String LIST_OPEN_ORDERS="v2/open_orders/%s";
+		private final String LIST_OPEN_ORDERS="v2/open_orders/%s/";
 		
 		private final String ORDER_STATUS="order_status/";
 		
@@ -176,7 +259,7 @@ public class ApiRequest {
 		
 		
 		//buy/{currency_pair}/
-		private final String BUY_LIMIT_ORDER="v2/buy/%s";
+		private final String BUY_LIMIT_ORDER="v2/buy/%s/";
 		
 		//buy/market/{currency_pair}/
 		private final String BUY_MARKET_ORDER="v2/buy/market/%s/";
