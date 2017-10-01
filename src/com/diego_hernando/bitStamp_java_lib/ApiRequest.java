@@ -166,7 +166,7 @@ public class ApiRequest {
 		return privateOperation(privateOperations.CANCEL_ALL_ORDERS, key, signature, nonce);
 	}
 	
-	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
 		if(isDailyOrder) {
 			postParameters=postParameters+"&daily_order=True";
@@ -174,25 +174,25 @@ public class ApiRequest {
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, float limitPrice ) throws IOException, BadResponseException {
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenBuyMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+	public String privateOpenBuyMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_MARKET_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, float limitPrice ) throws IOException, BadResponseException {
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
 		if(isDailyOrder) {
 			postParameters=postParameters+"&daily_order=True";
@@ -200,7 +200,7 @@ public class ApiRequest {
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+	public String privateOpenSellMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_MARKET_ORDER, currency.toString()), postParameters);

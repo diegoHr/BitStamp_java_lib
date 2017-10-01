@@ -105,38 +105,38 @@ public class BitStampAPI {
 		return new ApiRequest().privateCancelAllOrders(key, signature, nonce);
 	}
 	
-	public String openBuyLimitOrder(CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String openBuyLimitOrder(CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenBuyLimitOrder(key, signature, nonce, currency, amount, price, isDailyOrder);
 	}
 	
-	public String openBuyLimitOrder(CurrencyPairsBitStamp currency, float amount,float price,float limitPrice ) throws IOException, BadResponseException {
+	public String openBuyLimitOrder(CurrencyPairsBitStamp currency, double amount,double price,double limitPrice ) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenBuyLimitOrder(key, signature, nonce, currency, amount, price, limitPrice);
 	}
 	
-	public String openBuyMarketOrder(CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+	public String openBuyMarketOrder(CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenBuyMarketOrder(key, signature, nonce, currency, amount);
 		
 	}
 	
-	public String openSellLimitOrder(CurrencyPairsBitStamp currency, float amount,float price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String openSellLimitOrder(CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenSellLimitOrder(key, signature, nonce, currency, amount, price, isDailyOrder);
 	}
 	
-	public String openSellLimitOrder(CurrencyPairsBitStamp currency, float amount,float price,float limitPrice ) throws IOException, BadResponseException {
+	public String openSellLimitOrder(CurrencyPairsBitStamp currency, double amount,double price,double limitPrice ) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenSellLimitOrder(key, signature, nonce, currency, amount, price, limitPrice);
 	}
 	
-	public String openSellMarketOrder(CurrencyPairsBitStamp currency, float amount) throws IOException, BadResponseException {
+	public String openSellMarketOrder(CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
 		long nonce=new Date().getTime();
 		String signature=getSignature(nonce);
 		return new ApiRequest().privateOpenSellMarketOrder(key, signature, nonce, currency, amount);
