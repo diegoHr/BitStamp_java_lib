@@ -143,6 +143,10 @@ public class BitStampAPI {
 		
 	}
 	
+	public Date getDateServer() throws IOException {
+		return new ApiRequest().getDateServer();
+	}
+	
 	
 	
 	

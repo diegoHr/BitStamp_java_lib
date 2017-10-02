@@ -4,18 +4,17 @@ package com.diego_hernando.bitStamp_java_lib.tests;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.PrintStream;
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.diego_hernando.bitStamp_java_lib.BitStampAPI;
-import com.diego_hernando.bitStamp_java_lib.CurrencyPairsBitStamp;
-
+import com.diego_hernando.bitStamp_java_lib.CurrencyPairsBitStamp;;
 
 
 public class BitStampAPITest   {
 	private BitStampAPI api;
-	
 	
 	
 	
@@ -82,7 +81,7 @@ public class BitStampAPITest   {
 	}
 	
 	@Test
-	public void getAllTransactionsTest() throws Exception{
+	public void getAllMyTransactionsTest() throws Exception{
 		setUp();
 		String response=api.getMyTransactions();
 		System.out.println("Transactions : "+response);
@@ -90,7 +89,7 @@ public class BitStampAPITest   {
 		
 	}
 	@Test
-	public void getTransactionsEthEurTest() throws Exception{
+	public void getMyTransactionsEthEurTest() throws Exception{
 		setUp();
 		String response=api.getMyTransactions(CurrencyPairsBitStamp.ETHEUR);
 		System.out.println("Transactions : "+response);
@@ -107,6 +106,16 @@ public class BitStampAPITest   {
 		assertNotNull(response);
 	}
 	
+	
+	@Test
+	public void getDateServerTest() throws Exception{
+	
+		setUp();
+		Date date=api.getDateServer();
+		System.out.println("Date server:"+date.getTime());
+		assertNotNull(date);
+	}
+	
 	@Test
 	public void getOpenOrdersEthEurTest() throws Exception{
 		setUp();
@@ -114,6 +123,8 @@ public class BitStampAPITest   {
 		System.out.println("Open orders : "+response);
 		assertNotNull(response);
 	}
+	
+	
 	
 	
     protected void setUp() throws Exception{

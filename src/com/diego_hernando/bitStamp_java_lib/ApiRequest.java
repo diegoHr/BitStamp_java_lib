@@ -5,8 +5,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import com.diego_hernando.bitStamp_java_lib.exceptions.BadResponseException;
 
@@ -29,6 +31,12 @@ public class ApiRequest {
 	}
 	
 	
+	public Date getDateServer() throws IOException {
+		URL url = new URL(baseUrl);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		return new Date(con.getHeaderFieldDate("date", new Date().getTime()));
+		
+	}
 	private String publicOperation(String operation) throws IOException, BadResponseException {
 		
 		StringBuilder result = new StringBuilder();
@@ -38,6 +46,7 @@ public class ApiRequest {
 		con.setRequestMethod("GET");
 		
 		int responseCode=con.getResponseCode();
+		
 		if(responseCode!=HttpURLConnection.HTTP_OK){
 			throw new BadResponseException(responseCode);
 		}
