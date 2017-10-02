@@ -46,9 +46,8 @@ public enum BitStampCurrencyPairs {
 	}
 	
 	
-	public BitStampCurrencyPairs findValue(String value) {
-		BitStampCurrencyPairs currency=getMapForFindValues().get(value);
-		return currency;
+	public static BitStampCurrencyPairs findValue(String value) {
+		return mapForFindValues.get(value);
 		
 	}
 
