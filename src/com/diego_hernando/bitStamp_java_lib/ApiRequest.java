@@ -62,24 +62,24 @@ public class ApiRequest {
 	}
 	
 	
-	public String publicTicker(CurrencyPairsBitStamp currencyPair) throws IOException, BadResponseException {
+	public String publicTicker(BitStampCurrencyPairs currencyPair) throws IOException, BadResponseException {
 		return publicOperation(String.format(publicOperations.TICKER,currencyPair.toString()));
 	}
 	
 	
-	public String publicOrderBook(CurrencyPairsBitStamp currencyPair) throws IOException, BadResponseException {
+	public String publicOrderBook(BitStampCurrencyPairs currencyPair) throws IOException, BadResponseException {
 		return publicOperation(String.format(publicOperations.ORDER_BOOK, currencyPair.toString()));
 	}
 	
-	public String publicTransactionsLastHour(CurrencyPairsBitStamp currencyPair) throws IOException, BadResponseException {
+	public String publicTransactionsLastHour(BitStampCurrencyPairs currencyPair) throws IOException, BadResponseException {
 		String operation=String.format(publicOperations.TRANSACTIONS_DEFAULT, currencyPair.toString());
 		return publicOperation(operation);
 	}
 	
-	public String publicTransactionsLastDay(CurrencyPairsBitStamp currencyPair) throws IOException, BadResponseException {
+	public String publicTransactionsLastDay(BitStampCurrencyPairs currencyPair) throws IOException, BadResponseException {
 		return publicTransactions(currencyPair, "day");
 	}
-	public String publicTransactionsLastMinute(CurrencyPairsBitStamp currencyPair) throws IOException, BadResponseException {
+	public String publicTransactionsLastMinute(BitStampCurrencyPairs currencyPair) throws IOException, BadResponseException {
 		return publicTransactions(currencyPair, "minute");
 	}
 	
@@ -87,7 +87,7 @@ public class ApiRequest {
 		return publicOperation(publicOperations.CONV_RATE_EUR_USD);
 	}
 	
-	private String publicTransactions(CurrencyPairsBitStamp currencyPair, String time) throws IOException, BadResponseException {
+	private String publicTransactions(BitStampCurrencyPairs currencyPair, String time) throws IOException, BadResponseException {
 		String operation=String.format(publicOperations.TRANSACTIONS, currencyPair.toString(),time);
 		return publicOperation(operation);
 	}
@@ -140,7 +140,7 @@ public class ApiRequest {
 		return privateOperation(privateOperations.BALANCE_ALL, key, signature, nonce);
 	}
 	
-	public String privateGetBalance(String key,String signature, long nonce, CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+	public String privateGetBalance(String key,String signature, long nonce, BitStampCurrencyPairs currency) throws IOException, BadResponseException {
 		return privateOperation(String.format(privateOperations.BALANCE,currency.toString()), key, signature, nonce);
 	}
 	
@@ -148,7 +148,7 @@ public class ApiRequest {
 		return privateOperation(privateOperations.USER_TRANSACTIONS_ALL, key, signature, nonce);
 	}
 	
-	public String privateGetTransactions(String key,String signature, long nonce, CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+	public String privateGetTransactions(String key,String signature, long nonce, BitStampCurrencyPairs currency) throws IOException, BadResponseException {
 		return privateOperation(String.format(privateOperations.USER_TRANSACTIONS,currency.toString()), key, signature, nonce);
 	}
 	
@@ -156,7 +156,7 @@ public class ApiRequest {
 		return privateOperation(privateOperations.LIST_OPEN_ORDERS_ALL, key, signature, nonce);
 	}
 	
-	public String privateGetOpenOrders(String key,String signature, long nonce,CurrencyPairsBitStamp currency) throws IOException, BadResponseException {
+	public String privateGetOpenOrders(String key,String signature, long nonce,BitStampCurrencyPairs currency) throws IOException, BadResponseException {
 		return privateOperation(String.format(privateOperations.LIST_OPEN_ORDERS,currency.toString()), key, signature, nonce);
 	}
 	
@@ -175,7 +175,7 @@ public class ApiRequest {
 		return privateOperation(privateOperations.CANCEL_ALL_ORDERS, key, signature, nonce);
 	}
 	
-	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, BitStampCurrencyPairs currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
 		if(isDailyOrder) {
 			postParameters=postParameters+"&daily_order=True";
@@ -183,25 +183,25 @@ public class ApiRequest {
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
+	public String privateOpenBuyLimitOrder(String key,String signature, long nonce, BitStampCurrencyPairs currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenBuyMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
+	public String privateOpenBuyMarketOrder(String key, String signature, long nonce, BitStampCurrencyPairs currency, double amount) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.BUY_MARKET_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, BitStampCurrencyPairs currency, double amount,double price, double limitPrice ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price+"&limit_price="+limitPrice;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellLimitOrder(String key,String signature, long nonce, CurrencyPairsBitStamp currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
+	public String privateOpenSellLimitOrder(String key,String signature, long nonce, BitStampCurrencyPairs currency, double amount,double price, boolean isDailyOrder ) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount+"&price="+price;
 		if(isDailyOrder) {
 			postParameters=postParameters+"&daily_order=True";
@@ -209,7 +209,7 @@ public class ApiRequest {
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_LIMIT_ORDER, currency.toString()), postParameters);
 	}
 	
-	public String privateOpenSellMarketOrder(String key, String signature, long nonce, CurrencyPairsBitStamp currency, double amount) throws IOException, BadResponseException {
+	public String privateOpenSellMarketOrder(String key, String signature, long nonce, BitStampCurrencyPairs currency, double amount) throws IOException, BadResponseException {
 		String postParameters="key="+key+"&signature="+signature+"&nonce="+nonce+"&amount="+amount;
 		
 		return privateOperationCustomPostParameters(String.format(privateOperations.SELL_MARKET_ORDER, currency.toString()), postParameters);

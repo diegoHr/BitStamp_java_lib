@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.diego_hernando.bitStamp_java_lib.BitStampAPI;
-import com.diego_hernando.bitStamp_java_lib.CurrencyPairsBitStamp;;
+import com.diego_hernando.bitStamp_java_lib.BitStampCurrencyPairs;;
 
 
 public class BitStampAPITest   {
@@ -21,7 +21,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getTickerTest() throws Exception {
 		setUp();
-		for(CurrencyPairsBitStamp curPair: CurrencyPairsBitStamp.values()) {
+		for(BitStampCurrencyPairs curPair: BitStampCurrencyPairs.values()) {
 			getTickerOnePairTest(curPair);
 		}
 	}
@@ -29,7 +29,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getOrderBookTest() throws Exception{
 		setUp();
-		for(CurrencyPairsBitStamp curPair: CurrencyPairsBitStamp.values()) {
+		for(BitStampCurrencyPairs curPair: BitStampCurrencyPairs.values()) {
 			getOrderBookOnePairTest(curPair);
 		}
 	}
@@ -37,7 +37,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getTransactionsTest() throws Exception{
 		setUp();
-		for(CurrencyPairsBitStamp currencyPair: CurrencyPairsBitStamp.values()){
+		for(BitStampCurrencyPairs currencyPair: BitStampCurrencyPairs.values()){
 			getTransactionLastDayOnePairTest(currencyPair);
 			getTransactionLastHourOnePairTest(currencyPair);
 			getTransactionLastMinuteOnePairTest(currencyPair);
@@ -74,7 +74,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getBalanceEthEurTest() throws Exception{
 		setUp();
-		String response=api.getBalance(CurrencyPairsBitStamp.ETHEUR);
+		String response=api.getBalance(BitStampCurrencyPairs.ETHEUR);
 		System.out.println("Balance : "+response);
 		assertNotNull(response);
 		
@@ -91,7 +91,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getMyTransactionsEthEurTest() throws Exception{
 		setUp();
-		String response=api.getMyTransactions(CurrencyPairsBitStamp.ETHEUR);
+		String response=api.getMyTransactions(BitStampCurrencyPairs.ETHEUR);
 		System.out.println("Transactions : "+response);
 		assertNotNull(response);
 		
@@ -119,7 +119,7 @@ public class BitStampAPITest   {
 	@Test
 	public void getOpenOrdersEthEurTest() throws Exception{
 		setUp();
-		String response=api.getOpenOrders(CurrencyPairsBitStamp.ETHEUR);
+		String response=api.getOpenOrders(BitStampCurrencyPairs.ETHEUR);
 		System.out.println("Open orders : "+response);
 		assertNotNull(response);
 	}
@@ -136,7 +136,7 @@ public class BitStampAPITest   {
 	}
 
 	
-	private void getTickerOnePairTest(CurrencyPairsBitStamp currencyPair) throws Exception {
+	private void getTickerOnePairTest(BitStampCurrencyPairs currencyPair) throws Exception {
 				
 		String response=api.getTicker(currencyPair);
 		
@@ -146,25 +146,25 @@ public class BitStampAPITest   {
 		
 	}
 	
-	private void getOrderBookOnePairTest (CurrencyPairsBitStamp currencyPair) throws Exception{
+	private void getOrderBookOnePairTest (BitStampCurrencyPairs currencyPair) throws Exception{
 		String response=api.getTicker(currencyPair);
 		System.out.println("Order Book "+currencyPair+": "+response);
 		assertNotNull(response);
 	}
 	
-	private void getTransactionLastHourOnePairTest (CurrencyPairsBitStamp currencyPair) throws Exception{
+	private void getTransactionLastHourOnePairTest (BitStampCurrencyPairs currencyPair) throws Exception{
 		String response=api.getTransactionsLastHour(currencyPair);
 		new PrintStream(System.out, true, "UTF-8").println("Last hour transactions "+currencyPair+": "+response);
 		assertNotNull(response);
 	}
 	
-	private void getTransactionLastDayOnePairTest (CurrencyPairsBitStamp currencyPair) throws Exception{
+	private void getTransactionLastDayOnePairTest (BitStampCurrencyPairs currencyPair) throws Exception{
 		String response=api.getTransactionsLastDay(currencyPair);
 		new PrintStream(System.out, true, "UTF-8").println("Last day transactions "+currencyPair+": "+response);
 		assertNotNull(response);
 	}
 	
-	private void getTransactionLastMinuteOnePairTest (CurrencyPairsBitStamp currencyPair) throws Exception{
+	private void getTransactionLastMinuteOnePairTest (BitStampCurrencyPairs currencyPair) throws Exception{
 		String response=api.getTransactionsLastMinute(currencyPair);
 		new PrintStream(System.out, true, "UTF-8").println("Last minute transactions "+currencyPair+": "+response);
 		assertNotNull(response);
@@ -179,7 +179,7 @@ public class BitStampAPITest   {
 	
 	
 	
-	private void printTickerResponse(CurrencyPairsBitStamp currencyPair,String response) {
+	private void printTickerResponse(BitStampCurrencyPairs currencyPair,String response) {
 		System.out.println("Ticker "+currencyPair+": "+response);
 	}
 
