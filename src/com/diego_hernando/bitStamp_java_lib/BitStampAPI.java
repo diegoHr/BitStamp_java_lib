@@ -7,7 +7,7 @@ import java.util.Date;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
+
 
 import com.diego_hernando.bitStamp_java_lib.exceptions.BadResponseException;
 
@@ -162,7 +162,7 @@ public class BitStampAPI {
 		    SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
 		    sha256_HMAC.init(secret_key);
 		    byte[] hash = sha256_HMAC.doFinal(message.getBytes());
-		    signature = DatatypeConverter.printHexBinary(hash).toUpperCase();
+		    signature = byteArrayToHex(hash).toUpperCase();
 		    
 			
 		} catch (NoSuchAlgorithmException e) {
@@ -178,6 +178,12 @@ public class BitStampAPI {
 		return signature;
 		
 	}
+	private String byteArrayToHex(byte[] a) {
+		   StringBuilder sb = new StringBuilder(a.length * 2);
+		   for(byte b: a)
+		      sb.append(String.format("%02x", b));
+		   return sb.toString();
+		}
 	
 	
 	
