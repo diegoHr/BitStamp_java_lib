@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.diego_hernando.bitStamp_java_lib.BitStampAPI;
-import com.diego_hernando.bitStamp_java_lib.BitStampCurrencyPairs;;
+import com.diego_hernando.bitStamp_java_lib.BitStampCurrencyPairs;
 
 
 public class BitStampAPITest   {
