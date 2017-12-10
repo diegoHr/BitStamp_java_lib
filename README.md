@@ -53,7 +53,7 @@ Now this project is in beta, the buying and selling operations need to be tested
 And in a future implement public open data operations with the websocket API.
 ## Contributors
 Any contributions are highly appreciated. The best way to contribute code is to open a
-[pull request on BitBucket](https://www.atlassian.com/git/tutorials/making-a-pull-request).
+[pull request on GitHub](https://help.github.com/articles/about-pull-requests/).
 
 ## License
 MIT License.
