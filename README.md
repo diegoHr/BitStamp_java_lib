@@ -1,4 +1,8 @@
-# A BitStamp API Client in Java
+
+<p align="center">
+  <img src="https://github.com/diegoHr/BitStamp_java_lib/raw/master/logo.png?raw=true" alt="BitStamp API client logo"/>
+</p>
+
 
 Query the BitStamp API in Java 17. No external libraries used. And It is compatible with android.
 
