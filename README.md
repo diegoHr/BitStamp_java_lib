@@ -1,3 +1,4 @@
+# API client of BitStamp in Java
 
 <p align="center">
   <img src="https://github.com/diegoHr/BitStamp_java_lib/raw/master/logo.png?raw=true" alt="BitStamp API client logo"/>
