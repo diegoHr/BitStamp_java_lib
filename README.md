@@ -8,7 +8,7 @@ Query the BitStamp API in Java 17. No external libraries used. And It is compati
 
 
 ## How to use
-It is a maven project, to create the JAR package only execute `mvn clean package` and it will be in the `target` folder.
+It is a maven project, to create the JAR package only execute `mvn clean package -DskipTests` and it will be in the `target` folder.
 
 ## Example
 
