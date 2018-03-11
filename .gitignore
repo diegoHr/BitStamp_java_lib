@@ -1,6 +1,6 @@
 bin
 *.swp
-ApiLoginDataTest.java
+#ApiLoginDataTest.java
 /target/
 .settings
 

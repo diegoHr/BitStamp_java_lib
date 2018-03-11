@@ -57,7 +57,8 @@ public class BitStampAPITest   {
 		setUp();
 		long nonce=1506451251465L;
 		String signature=api.getSignature(nonce);
-		Assert.assertEquals("61DA60163CF90673B01623C14E0FF72CA31DC8FEEDC9BDE134714FEAC5CEED99", signature);
+		System.out.println("Your signature must be:"+signature);
+		Assert.assertEquals(new ApiLoginDataTest().signature, signature);
 	}
 	
 	@Test
