@@ -13,8 +13,10 @@ import com.diego_hernando.bitStamp_java_lib.WebsocketTradeDoneListener;
 
 public class ApiWebsocketTransactionsTest {
 	
+	private boolean success;
 	@Test
 	public void test() throws Exception{
+		success=false;
 		WebsocketErrorListener wbErrListener=new WebsocketErrorListener() {
 			
 			@Override
@@ -29,6 +31,7 @@ public class ApiWebsocketTransactionsTest {
 			public void onTradeDone(String jsonTrade, BitStampCurrencyPairs tradingPair) {
 				Assert.assertTrue(jsonTrade.length()>0);	
 				System.out.println(tradingPair+": "+jsonTrade);
+				success=true;
 			}
 		};
 		
@@ -36,13 +39,11 @@ public class ApiWebsocketTransactionsTest {
 		
 		wbs.openAllChannels();
 		wbs.connect();
-		System.out.println("Press enter key when you want finish this test.");
-		@SuppressWarnings("resource")
-		Scanner keyboard = new Scanner(System.in);
-		keyboard.nextLine();
+		
+		Thread.sleep(20000);
+		Assert.assertTrue(success);
 		
 		wbs.disconnect();
-		
 	}
 
 }
