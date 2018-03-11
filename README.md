@@ -42,6 +42,51 @@ All operations of the API are available except all relating to depositing and wi
 
 ** All operations return a String with the JSON response of the server, It is responsability of the user parse and check the JSON.**
 
+#### Use real time transactions websocket
+
+```Java
+import com.diego_hernando.bitStamp_java_lib.BitStampCurrencyPairs;
+import com.diego_hernando.bitStamp_java_lib.ApiWebsocketTransactions;
+import com.diego_hernando.bitStamp_java_lib.WebsocketErrorListener;
+import com.diego_hernando.bitStamp_java_lib.WebsocketTradeDoneListener;
+...
+
+//Implementation of listener for errors produced in websocket.
+WebsocketErrorListener wbErrListener=new WebsocketErrorListener() {
+
+	@Override
+	public void onError(String error, String errorCode, ApiWebsocketTransactions webSocket) {
+		//Your code
+
+	}
+};
+
+//Implementation of listener for transactions, that are received by websocket.
+WebsocketTradeDoneListener wbTradeDoneListener=new WebsocketTradeDoneListener() {
+
+	@Override
+	public void onTradeDone(String jsonTrade, BitStampCurrencyPairs tradingPair) {
+		//Your code
+	}
+};
+
+ApiWebsocketTransactions wbs=new BitStampAPI().getWebSocketOfTransactions(wbErrListener,wbTradeDoneListener);
+
+//The method openChannel, only opens a chanel to receive data of the BitStamp currency pair passed by argument.
+wbs.openChannel(BitStampCurrencyPairs.ETHEUR);
+//The method openAllChannels opens chanels to receive data of all BitStamp currency pairs.
+//wbs.openAllChannels();
+
+//Connect websocket
+wbs.connect();
+....
+
+//Disconnect websocket
+wbs.disconnect();
+```
+>> This implementation recconect automatically. Unless it suffers a irrecoverable error, in that case It executes the method onError of *WebsocketErrorListener*.
+
+
 ### Test execution
 If you want to run the test, you will need a BitStamp account and create an access to the API, and complete with your access data the fields of ApiLoginDataTest.java before to execute BitStampAPITest.java.
 

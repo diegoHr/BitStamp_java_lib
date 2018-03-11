@@ -32,6 +32,10 @@ public class BitStampAPI {
 	}
 		
 	
+	public ApiWebsocketTransactions getWebSocketOfTransactions(WebsocketErrorListener websocketErrorListener,WebsocketTradeDoneListener websocketTradeListener) {
+		return new ApiWebsocketTransactions(websocketErrorListener, websocketTradeListener);
+	}
+	
 	public String getTicker(BitStampCurrencyPairs currencyPair) throws IOException,BadResponseException {
 		return new ApiRequest().publicTicker(currencyPair);
 	}
