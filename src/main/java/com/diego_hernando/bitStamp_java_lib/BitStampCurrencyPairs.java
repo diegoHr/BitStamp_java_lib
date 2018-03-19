@@ -20,7 +20,12 @@ public enum BitStampCurrencyPairs {
 	LTCBTC ("ltcbtc"),
 	ETHUSD ("ethusd"),
 	ETHEUR ("etheur"),
-	ETHBTC ("ethbtc");
+	ETHBTC ("ethbtc"),
+	
+	BCHEUR("bcheur"),
+	BCHUSD("bchusd"),
+	BCHBTC("bchbtc");
+	
 	
 	private String currencyPair;
 	private static Map<String,BitStampCurrencyPairs> mapForFindValues;
